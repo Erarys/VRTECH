@@ -10,7 +10,9 @@ def create_product(product_dt: dict):
             rating=product_dt["rating"],
             reviews=product_dt["reviews"],
             min_price=product_dt["min_price"],
-            max_price=product_dt["max_price"]
+            max_price=product_dt["max_price"],
+            salesman_count=product_dt["salesman_count"],
+            image_link=product_dt["image_link"]
         )
         session.add(product)
         session.commit()

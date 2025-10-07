@@ -11,3 +11,5 @@ class Product(Base):
     max_price = Column(Integer, nullable=True)  # Максимальная цена
     rating = Column(Float, nullable=True)       # Рейтинг
     reviews = Column(Integer, nullable=True)    # Кол-во отзывов
+    salesman_count = Column(Integer, nullable=True)
+    image_link = Column(String, nullable=True)

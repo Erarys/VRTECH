@@ -7,3 +7,5 @@ class ProductValid(BaseModel):
     max_price: int
     rating: int
     reviews: int
+    salesman_count: int
+    image_link: str

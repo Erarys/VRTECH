@@ -11,7 +11,9 @@ from models import ProductValid
 from db.database import Base, engine
 
 from dotenv import load_dotenv
+
 load_dotenv()
+
 
 def setup_driver(headless: bool = False) -> webdriver.Chrome:
     """Создание и настройка Selenium драйвера"""
@@ -40,6 +42,11 @@ def extract_reviews(driver) -> int:
     """Извлекает количество отзывов"""
     reviews_text = driver.find_element(By.XPATH, '//a[@class="item__rating-link"]/span').text
     return int(re.sub(r"\D", "", reviews_text))
+
+
+def extract_image_link(driver) -> str:
+    image_link = driver.find_elements(By.XPATH, '//img[@class="item__slider-pic"]')[0].get_attribute("src")
+    return str(image_link)
 
 
 def collect_prices(driver) -> list[int]:
@@ -92,6 +99,8 @@ def main():
     rating = extract_rating(driver)
     reviews = extract_reviews(driver)
     prices = collect_prices(driver)
+    salesman_count = len(prices)
+    image_link = extract_image_link(driver)
 
     # Формируем результат
     data = {
@@ -100,7 +109,9 @@ def main():
         "rating": rating,
         "reviews": reviews,
         "min_price": min(prices),
-        "max_price": max(prices)
+        "max_price": max(prices),
+        "salesman_count": salesman_count,
+        "image_link": image_link
     }
     product = ProductValid(**data).dict()
     create_product(product)
@@ -112,8 +123,7 @@ def main():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
-    Base.metadata.drop_all(bind=engine)  # Удаляет все таблицы
-    Base.metadata.create_all(bind=engine)  # Создает их заново по моделям
+    # Base.metadata.drop_all(bind=engine)  # Удаляет все таблицы
+    # Base.metadata.create_all(bind=engine)  # Создает их заново по моделям
     main()
     print("✅ Таблицы созданы!")
-

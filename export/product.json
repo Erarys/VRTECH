@@ -4,5 +4,7 @@
     "min_price": 10,
     "max_price": 10,
     "rating": 50,
-    "reviews": 10701
+    "reviews": 10703,
+    "salesman_count": 5,
+    "image_link": "https://resources.cdn-kaspi.kz/img/m/p/h5c/hec/86261115060254.png?format=gallery-medium"
 }
