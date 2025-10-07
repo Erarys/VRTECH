@@ -1,0 +1,16 @@
+services:
+  kaspi-postgres:
+    image: postgres:15
+    container_name: kaspi-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: kaspi_db
+    ports:
+      - "1234:5432"   # Docker порт 1234 на Windows, внутри контейнера 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
