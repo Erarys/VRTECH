@@ -70,7 +70,8 @@ def collect_prices(driver) -> list[int]:
 
         next_btn.click()
         time.sleep(1)
-        break
+
+
 
     return all_prices
 
